@@ -1,5 +1,6 @@
 import { Metronome } from './classes/Metronome';
 
+
 (function(){
   let myOption = {
     elements: [

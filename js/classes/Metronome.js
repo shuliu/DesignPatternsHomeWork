@@ -1,7 +1,31 @@
 
+import { Clock } from './Clock';
+import * as MY_CONST from './consts';
+
+/**
+ * 補0  helper
+ * @param {string|number} str 需要補0字串
+ * @param {number} len 長度
+ */
+const padLeft = (str, len) => {
+  str = '' + str;
+  return str.length >= len ? str : new Array(len - str.length + 1).join("0") + str;
+}
+
+/**
+ * 傳入參數
+ */
 const defaultOptions = {
-  /** @param {object} elements 要監聽回傳的元素 */
-  elements: []
+  /**
+   * @param {object} elements 要監聽回傳的元素 Group, 裡面包 json
+   * */
+  elements: [
+    // {
+    //   hour: document.querySelector('.hour'),
+    //   minute: document.querySelector('.minute'),
+    //   second: document.querySelector('.second')
+    // }, ...
+  ]
 };
 
 /**
@@ -22,6 +46,8 @@ export class Metronome {
      */
     this.options = Object.assign(defaultOptions, myOptions);
 
+    this.myClock = new Clock();
+
     this.initial();
   }
 
@@ -31,43 +57,44 @@ export class Metronome {
    * @param {JSON} groupElement
    */
   setEventListenerGroup(groupElement) {
-    console.log('setEventListener');
-    this.setEventListenerWithHour(groupElement.hour);
-    this.setEventListenerWithMinute(groupElement.minute);
-    this.setEventListenerWithSecond(groupElement.second);
+    console.log('setEventListenerGroup');
+
+    setInterval(() => {
+      this.renderHour(groupElement.hour, this.myClock.hour);
+      this.renderMinute(groupElement.minute, this.myClock.minute);
+      this.renderSecond(groupElement.second, this.myClock.second);
+    }, MY_CONST.INTERVAL_LOOP);
+
   }
 
   /**
-   * setEventListenerWithHour
-   * 加入監聽 (Hour)
+   * render Hour Element
    * @param {NodeList} Element
    * @param {string} Hour
    */
-  setEventListenerWithHour(Element, Hour) {
+  renderHour(Element, Hour) {
     if( Hour === undefined ) { Hour = '00'; }
-    Element.innerText = Hour;
+    Element.innerText = padLeft(Hour, 2);
   }
 
   /**
-   * setEventListenerWithMinute
-   * 加入監聽 (Minute)
+   * render Minute Element
    * @param {NodeList} Element
    * @param {string} Minute
    */
-  setEventListenerWithMinute(Element, Minute) {
+  renderMinute(Element, Minute) {
     if( Minute === undefined ) { Minute = '00'; }
-    Element.innerText = Minute;
+    Element.innerText = padLeft(Minute, 2);
   }
 
   /**
-   * setEventListenerWithSecond
-   * 加入監聽 (Second)
+   * render Second Element
    * @param {NodeList} Element
    * @param {string} Second
    */
-  setEventListenerWithSecond(Element, Second) {
+  renderSecond(Element, Second) {
     if( Second === undefined ) { Second = '00'; }
-    Element.innerText = Second;
+    Element.innerText = padLeft(Second, 2);
   }
 
   /**
