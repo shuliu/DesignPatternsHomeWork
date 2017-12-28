@@ -11,7 +11,7 @@ export class Metronome {
 
   /**
    * constructor
-   * @param {json} myOptions 
+   * @param {json} myOptions
    */
   constructor(myOptions = {}) {
     console.log('new a Metronome');
@@ -26,13 +26,48 @@ export class Metronome {
   }
 
   /**
-   * setEventListener
-   * 加入監聽
-   * @param {NodeList} element 
+   * setEventListenerGroup
+   * 加入監聽 (群組)
+   * @param {JSON} groupElement
    */
-  setEventListener(element) {
+  setEventListenerGroup(groupElement) {
     console.log('setEventListener');
-    console.log(element);
+    this.setEventListenerWithHour(groupElement.hour);
+    this.setEventListenerWithMinute(groupElement.minute);
+    this.setEventListenerWithSecond(groupElement.second);
+  }
+
+  /**
+   * setEventListenerWithHour
+   * 加入監聽 (Hour)
+   * @param {NodeList} Element
+   * @param {string} Hour
+   */
+  setEventListenerWithHour(Element, Hour) {
+    if( Hour === undefined ) { Hour = '00'; }
+    Element.innerText = Hour;
+  }
+
+  /**
+   * setEventListenerWithMinute
+   * 加入監聽 (Minute)
+   * @param {NodeList} Element
+   * @param {string} Minute
+   */
+  setEventListenerWithMinute(Element, Minute) {
+    if( Minute === undefined ) { Minute = '00'; }
+    Element.innerText = Minute;
+  }
+
+  /**
+   * setEventListenerWithSecond
+   * 加入監聽 (Second)
+   * @param {NodeList} Element
+   * @param {string} Second
+   */
+  setEventListenerWithSecond(Element, Second) {
+    if( Second === undefined ) { Second = '00'; }
+    Element.innerText = Second;
   }
 
   /**
@@ -41,9 +76,9 @@ export class Metronome {
    */
   initial() {
     console.log('initial');
-    
-    this.options.elements.forEach(element => {
-      this.setEventListener(element);
+
+    this.options.elements.forEach(groupElement => {
+      this.setEventListenerGroup(groupElement);
     });
   }
 }
