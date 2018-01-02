@@ -3,7 +3,7 @@ import * as MY_CONST from './consts';
 
 export class Clock {
   constructor() {
-    console.log('new a Clock class');
+    // console.log('new a Clock class');
 
     this.seconds = 0;
     this.minutes = 0;

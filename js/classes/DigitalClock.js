@@ -29,16 +29,16 @@ const defaultOptions = {
 };
 
 /**
- * class Metronome
+ * class DigitalClock
  */
-export class Metronome {
+export class DigitalClock {
 
   /**
    * constructor
    * @param {json} myOptions
    */
   constructor(myOptions = {}) {
-    console.log('new a Metronome');
+    // console.log('new a DigitalClock');
 
     /**
      * 選項
@@ -48,18 +48,20 @@ export class Metronome {
 
     this.myClock = new Clock();
 
+    this.myInterval;
+
     this.initial();
   }
 
   /**
-   * setEventListenerGroup
+   * private setEventListenerGroup
    * 加入監聽 (群組)
    * @param {JSON} groupElement
    */
   setEventListenerGroup(groupElement) {
-    console.log('setEventListenerGroup');
+    // console.log('setEventListenerGroup');
 
-    setInterval(() => {
+    this.setInterval(() => {
       this.renderHour(groupElement.hour, this.myClock.hour);
       this.renderMinute(groupElement.minute, this.myClock.minute);
       this.renderSecond(groupElement.second, this.myClock.second);
@@ -68,7 +70,7 @@ export class Metronome {
   }
 
   /**
-   * render Hour Element
+   * private render Hour Element
    * @param {NodeList} Element
    * @param {string} Hour
    */
@@ -78,7 +80,7 @@ export class Metronome {
   }
 
   /**
-   * render Minute Element
+   * private render Minute Element
    * @param {NodeList} Element
    * @param {string} Minute
    */
@@ -88,7 +90,7 @@ export class Metronome {
   }
 
   /**
-   * render Second Element
+   * private render Second Element
    * @param {NodeList} Element
    * @param {string} Second
    */
@@ -98,12 +100,19 @@ export class Metronome {
   }
 
   /**
-   * initial
+   * private initial
    * private method
    */
   initial() {
-    console.log('initial');
+    // console.log('initial');
 
+    this.onStart();
+  }
+
+  /**
+   * 開始
+   */
+  onStart() {
     this.options.elements.forEach(groupElement => {
       this.setEventListenerGroup(groupElement);
     });
