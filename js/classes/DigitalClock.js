@@ -61,7 +61,7 @@ export class DigitalClock {
   setEventListenerGroup(groupElement) {
     // console.log('setEventListenerGroup');
 
-    this.setInterval(() => {
+    this.myInterval = setInterval(() => {
       this.renderHour(groupElement.hour, this.myClock.hour);
       this.renderMinute(groupElement.minute, this.myClock.minute);
       this.renderSecond(groupElement.second, this.myClock.second);
@@ -116,5 +116,13 @@ export class DigitalClock {
     this.options.elements.forEach(groupElement => {
       this.setEventListenerGroup(groupElement);
     });
+  }
+
+  /**
+   * 停止
+   */
+  onClose() {
+    clearInterval(this.myInterval);
+    this.myClock.stop();
   }
 }

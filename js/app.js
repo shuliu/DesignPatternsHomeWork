@@ -1,6 +1,5 @@
 import { DigitalClock } from './classes/DigitalClock';
 
-
 (function(){
   let myOption1 = {
     elements: [
@@ -25,7 +24,6 @@ import { DigitalClock } from './classes/DigitalClock';
 
   let myClock1 = new DigitalClock(myOption1);
   let myClock2 = new DigitalClock(myOption2);
-
 
 
   console.log('init app');
